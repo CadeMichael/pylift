@@ -3,7 +3,6 @@ Mead Head Math [mhm] module.
 Provides the basic math behind calculating / predicting weights and or
 intesities.
 """
-from typing import Tuple
 
 
 def one_rep_max(reps: float, weight: float) -> float:
