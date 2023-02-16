@@ -1,3 +1,4 @@
 lib/__pycache__
 pylift.egg-info/
 env/
+__pycache__/

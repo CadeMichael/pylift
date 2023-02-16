@@ -5,6 +5,9 @@ intesities.
 """
 
 
+from typing import List
+
+
 def one_rep_max(reps: float, weight: float) -> float:
     """
     Cummings and Finn:
@@ -14,7 +17,7 @@ def one_rep_max(reps: float, weight: float) -> float:
     return rm
 
 
-def relative_intensity(reps: float, weight: float, one_rm: float):
+def relative_intensity(reps: float, weight: float, one_rm: float) -> List[float]:
     """
     Realtive Intensity:
     takes the weight you did for a number of reps divided by the highest
@@ -23,7 +26,7 @@ def relative_intensity(reps: float, weight: float, one_rm: float):
     max_weight = one_rm * (1.0278 - 0.0278 * reps)
     ai = (weight) / one_rm
     ri = ai / (max_weight / one_rm)
-    return map(lambda x: round(x, 3), (ai, ri))
+    return list(map(lambda x: round(x, 3), (ai, ri)))
 
 
 def increased_ai(reps: int, desired_ri: float) -> float:
