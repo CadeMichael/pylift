@@ -1,11 +1,24 @@
 import csv
 from typing import List
 from lib.lift import Lift
+import configparser
+import os
+
+
+def get_lift_dir():
+    try:
+        config = configparser.ConfigParser()
+        config.read(f"{os.environ.get('HOME')}/.config/pylift.ini")
+        filepath = config["dir"]["lift_path"]
+    except:
+        filepath = f"{os.environ.get('HOME')}/Documents"
+    return filepath
 
 
 def read_lift(name: str) -> List | str:
     try:
-        with open(f"./lifts/{name}.csv", newline="") as csvfile:
+        file = f"{get_lift_dir()}/{name}.csv"
+        with open(file, newline="") as csvfile:
             reader = csv.reader(csvfile, delimiter=",")
 
             def conv_int(row):
@@ -26,7 +39,7 @@ def read_lift(name: str) -> List | str:
 def make_lift_list(name: str) -> List[Lift]:
     data = read_lift(name)
     if type(data) == str:
-        # print(data)
+        print(data)
         return []
     lifts: List[Lift] = []
     date: str = ""
@@ -54,7 +67,8 @@ def make_lift_list(name: str) -> List[Lift]:
 
 def create_lift(name: str) -> str:
     try:
-        with open(f"./lifts/{name}.csv", "w", newline="") as csvfile:
+        file = f"{get_lift_dir()}/{name}.csv"
+        with open(file, "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
             rows = [["/* Date */ "], ["/* Weight", " Reps", " Sets */"], []]
             writer.writerows(rows)

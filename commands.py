@@ -3,6 +3,7 @@ Commands module [commands]
 Provides cli commands for interacting with Meathead Math.
 """
 import click
+import os
 
 # called in main.py so needs to be lib.mhm
 import lib.mhm as mhm
@@ -54,7 +55,7 @@ def new_ri(r, ri):
 @click.option(
     "-rm", prompt="One Rep Max", type=float, help="One Rep Max for given lift"
 )
-def show_lift_graph(n, rm):
+def graph(n, rm):
     """Create a graph of relative intensity and volume over time for a lift."""
     res = vis.show_bar_charts(n, rm)
     if res:
@@ -69,9 +70,23 @@ def new_lift(n):
     click.echo(res)
 
 
+@click.command()
+def lifts():
+    """List all lifts and show lift directory."""
+    try:
+        dir = fm.get_lift_dir()
+        files = os.listdir(dir)
+        click.echo(dir)
+        for f in files:
+            click.echo(f)
+    except:
+        click.echo("file & dir error, no directory set")
+
+
 """add commands"""
 cli.add_command(est_max)
-cli.add_command(rel_int)
-cli.add_command(new_ri)
+cli.add_command(graph)
+cli.add_command(lifts)
 cli.add_command(new_lift)
-cli.add_command(show_lift_graph)
+cli.add_command(new_ri)
+cli.add_command(rel_int)
