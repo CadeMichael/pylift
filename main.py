@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import commands as cmds
 
 if __name__ == "__main__":

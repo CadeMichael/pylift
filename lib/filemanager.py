@@ -24,7 +24,7 @@ def read_lift(name: str) -> List | str:
 def make_lift_list(name: str) -> List[Lift]:
     data = read_lift(name)
     if type(data) == str:
-        print(data)
+        # print(data)
         return []
     lifts: List[Lift] = []
     date: str = ""
@@ -32,7 +32,7 @@ def make_lift_list(name: str) -> List[Lift]:
 
     # get rid of [] caused by newlines in the file
     data = [d for d in data if d != []]
-    print(data)
+    # print(data)
     for row in data:
         if len(row) == 1 and sets != []:
             newlift = Lift(date, sets)

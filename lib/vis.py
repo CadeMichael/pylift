@@ -3,7 +3,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import lib.filemanager as fm
 from lib.lift import Lift
-matplotlib.use('qtagg')
+# matplotlib.use('qtagg')
 
 def show_bar_charts(name: str, rm: float):
     lis: List[Lift] = fm.make_lift_list(name)
