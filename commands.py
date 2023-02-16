@@ -57,9 +57,7 @@ def new_ri(r, ri):
 def show_lift_graph(n, rm):
     """Create a graph of relative intensity and volume over time for a lift."""
     res = vis.show_bar_charts(n, rm)
-    if res == "":
-        click.echo(f"{n} graph rendering...")
-    else:
+    if res:
         click.echo(res)
 
 
@@ -68,10 +66,7 @@ def show_lift_graph(n, rm):
 def new_lift(n):
     """Create a new csv for the given lift name."""
     res = fm.create_lift(n)
-    if res == "":
-        click.echo(f"{n}.csv created")
-    else:
-        click.echo(res)
+    click.echo(res)
 
 
 """add commands"""

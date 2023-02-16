@@ -9,9 +9,10 @@ def read_lift(name: str) -> List | str:
             reader = csv.reader(csvfile, delimiter=",")
 
             def conv_int(row):
-                if len(row) == 3 and row[0]!= "/* Weight":
+                if len(row) == 3 and row[0] != "/* Weight":
                     return list(map(lambda x: int(x), row))
                 return row
+
             try:
                 rows = [conv_int(row) for row in reader]
             except:
@@ -20,6 +21,7 @@ def read_lift(name: str) -> List | str:
             return rows[3:]
     except:
         return f"No file {name}.csv"
+
 
 def make_lift_list(name: str) -> List[Lift]:
     data = read_lift(name)
@@ -48,17 +50,13 @@ def make_lift_list(name: str) -> List[Lift]:
         lifts.append(Lift(date, sets))
 
     return lifts
-            
+
 
 def create_lift(name: str) -> str:
     try:
         with open(f"./lifts/{name}.csv", "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
-            rows = [
-                ["/* Date */ "],
-                ["/* Weight", " Reps", " Sets */"],
-                []
-            ]
+            rows = [["/* Date */ "], ["/* Weight", " Reps", " Sets */"], []]
             writer.writerows(rows)
             return f"New lift {name}.csv written."
     except:

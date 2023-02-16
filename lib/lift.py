@@ -22,4 +22,4 @@ class Lift:
             ri = mhm.relative_intensity(reps, weight, rm)[1]
             if ri > highest:
                 highest = ri
-        return highest*100
+        return highest * 100
