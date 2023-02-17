@@ -3,20 +3,20 @@ from typing import List
 
 
 class Lift:
-    def __init__(self, date: str, lifts: List):
+    def __init__(self, date: str, sets: List):
         self.date = date
-        self.lifts = lifts
+        self.sets = sets
 
     def volume(self) -> float:
         vol = 0
-        for lift in self.lifts:
+        for lift in self.sets:
             w, r, s = lift
             vol += w * r * s
         return vol
 
     def rel_int(self, rm: float) -> float:
         highest = 0
-        for lift in self.lifts:
+        for lift in self.sets:
             weight = lift[0]
             reps = lift[1]
             ri = mhm.relative_intensity(reps, weight, rm)[1]

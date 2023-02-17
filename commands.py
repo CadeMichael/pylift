@@ -57,7 +57,7 @@ def new_ri(r, ri):
 )
 def graph(n, rm):
     """Create a graph of relative intensity and volume over time for a lift."""
-    res = vis.show_bar_charts(n, rm)
+    res = vis.show_bar_charts(n.strip(), rm)
     if res:
         click.echo(res)
 
@@ -66,6 +66,7 @@ def graph(n, rm):
 @click.option("-n", prompt="Name", type=str, help="Name of lift")
 def new_lift(n):
     """Create a new csv for the given lift name."""
+    n.strip()
     res = fm.create_lift(n)
     click.echo(res)
 

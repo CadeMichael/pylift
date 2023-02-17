@@ -15,19 +15,19 @@ def get_lift_dir():
     return filepath
 
 
-def read_lift(name: str) -> List | str:
+def read_lift(name: str, path: str = get_lift_dir()) -> List | str:
     try:
-        file = f"{get_lift_dir()}/{name}.csv"
+        file = f"{path}/{name}.csv"
         with open(file, newline="") as csvfile:
             reader = csv.reader(csvfile, delimiter=",")
 
-            def conv_int(row):
+            def conv_num(row):
                 if len(row) == 3 and row[0] != "/* Weight":
-                    return list(map(lambda x: int(x), row))
+                    return list(map(lambda x: float(x), row))
                 return row
 
             try:
-                rows = [conv_int(row) for row in reader]
+                rows = [conv_num(row) for row in reader]
             except:
                 return f"Malformed {name}.csv"
 
@@ -36,10 +36,9 @@ def read_lift(name: str) -> List | str:
         return f"No file {name}.csv"
 
 
-def make_lift_list(name: str) -> List[Lift]:
-    data = read_lift(name)
+def make_lift_list(name: str, path: str = get_lift_dir()) -> List[Lift]:
+    data = read_lift(name, path)
     if type(data) == str:
-        print(data)
         return []
     lifts: List[Lift] = []
     date: str = ""
@@ -47,7 +46,6 @@ def make_lift_list(name: str) -> List[Lift]:
 
     # get rid of [] caused by newlines in the file
     data = [d for d in data if d != []]
-    # print(data)
     for row in data:
         if len(row) == 1 and sets != []:
             newlift = Lift(date, sets)
@@ -65,9 +63,9 @@ def make_lift_list(name: str) -> List[Lift]:
     return lifts
 
 
-def create_lift(name: str) -> str:
+def create_lift(name: str, path: str = get_lift_dir()) -> str:
     try:
-        file = f"{get_lift_dir()}/{name}.csv"
+        file = f"{path}/{name}.csv"
         with open(file, "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
             rows = [["/* Date */ "], ["/* Weight", " Reps", " Sets */"], []]
