@@ -32,3 +32,10 @@ lift_path = /home/cade/Desktop/lifts
 225, 7, 1
 205, 10, 2
 ```
+
+# Tests
+
+- In the test folder there are tests for file management and the lift class
+- the tests provide decent code coverage and ensure basic functionality works within the bounds of 'reasonable input' ie strings for workout names and numbers for lift values.
+- to run the tests you have to execute each file individually from the project root
+  - `python -n unittest tests/[name].py`
